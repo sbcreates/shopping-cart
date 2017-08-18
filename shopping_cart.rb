@@ -19,12 +19,14 @@ class Cart
   end
 
   def add_product(name, base_price, tax_rate)
+    @total_in_cart += 1
     new_product = Product.new(name, base_price, tax_rate)
     @in_cart << new_product
-    @total_in_cart += 1
+    return new_product
   end
 
   def remove_product(item)
+    @total_in_cart -= 1
     @in_cart.delete(item)
   end
 
@@ -56,5 +58,6 @@ p cart1.total_in_cart
 p cart1.total_before_tax
 p cart1.total_after_tax
 p cart1.inspect
-p cart1.remove_product(mousse)
+cart1.remove_product(mousse)
+p cart1.inspect
 p cart1.total_in_cart
